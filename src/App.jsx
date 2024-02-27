@@ -3,6 +3,25 @@ import { saveAs } from "file-saver";
 import "./App.css";
 import { useEffect, useState } from "react";
 import upl from "./csvjson.json";
+import jsonToExcel from "./Components/convertor";
+
+// json to xlsx file convertor
+// const jsonToExcel = (data, fileName) => {
+//   const worksheet = XLSX.utils.json_to_sheet(data);
+//   const workbook = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+//   const excelBuffer = XLSX.write(workbook, {
+//     bookType: "xlsx",
+//     type: "array",
+//   });
+//   const blob = new Blob([excelBuffer], {
+//     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+//   });
+//   saveAs(blob, `${fileName}.xlsx`);
+// };
+
+// end of json to xlsx file convertor
 
 function App() {
   // points function //
@@ -29,7 +48,6 @@ function App() {
   } else {
     initsold = JSON.parse(localStorage.getItem("sold"));
   }
-
   // end of local storage
 
   // main array to iterate over player csv file
@@ -70,22 +88,6 @@ function App() {
     localStorage.setItem("sold", JSON.stringify(search));
   }, [search]);
 
-  ///
-  const jsonToExcel = (data, fileName) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    const blob = new Blob([excelBuffer], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-    });
-    saveAs(blob, `${fileName}.xlsx`);
-  };
-
   return (
     <>
       <div>
@@ -108,7 +110,13 @@ function App() {
         <button className="btn btn-primary mx-2" onClick={increasePoints}>
           Increase
         </button>
-        <button onClick={jsonToExcel(search, "upl_data")}>download</button>
+        <button
+          onClick={() => {
+            jsonToExcel(search, "upldata");
+          }}
+        >
+          download
+        </button>
       </div>
     </>
   );
