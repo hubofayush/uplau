@@ -1,8 +1,11 @@
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 import "./App.css";
 import { useEffect, useState } from "react";
 import upl from "./csvjson.json";
 
 function App() {
+  // points function //
   const [points, setPoints] = useState(100);
 
   const increasePoints = () => {
@@ -16,7 +19,9 @@ function App() {
       setPoints(10000);
     }
   };
+  // end of point function
 
+  // lcoalstoraage
   let initsold;
 
   if (localStorage.getItem("sold") === null) {
@@ -25,6 +30,9 @@ function App() {
     initsold = JSON.parse(localStorage.getItem("sold"));
   }
 
+  // end of local storage
+
+  // main array to iterate over player csv file
   const [item, setItem] = useState(0);
 
   let i = 0;
@@ -39,6 +47,7 @@ function App() {
     setPoints(100);
   };
 
+  // sold function
   const solded = () => {
     let player = {
       name: upl[item].Name,
@@ -52,10 +61,30 @@ function App() {
     setPoints(100);
     next();
   };
+
+  // main array of player data
   const [search, setSearch] = useState(initsold);
+
+  // useeffect
   useEffect(() => {
     localStorage.setItem("sold", JSON.stringify(search));
   }, [search]);
+
+  ///
+  const jsonToExcel = (data, fileName) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const blob = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+    });
+    saveAs(blob, `${fileName}.xlsx`);
+  };
 
   return (
     <>
@@ -79,6 +108,7 @@ function App() {
         <button className="btn btn-primary mx-2" onClick={increasePoints}>
           Increase
         </button>
+        <button onClick={jsonToExcel(search, "upl_data")}>download</button>
       </div>
     </>
   );
