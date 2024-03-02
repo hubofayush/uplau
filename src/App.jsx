@@ -1,29 +1,58 @@
-import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
 import "./App.css";
 import { useEffect, useState } from "react";
 import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 
-// json to xlsx file convertor
-// const jsonToExcel = (data, fileName) => {
-//   const worksheet = XLSX.utils.json_to_sheet(data);
-//   const workbook = XLSX.utils.book_new();
-//   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-//   const excelBuffer = XLSX.write(workbook, {
-//     bookType: "xlsx",
-//     type: "array",
-//   });
-//   const blob = new Blob([excelBuffer], {
-//     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-//   });
-//   saveAs(blob, `${fileName}.xlsx`);
-// };
-
-// end of json to xlsx file convertor
-
 function App() {
+  // teams array
+
+  // viraj 11
+  const [viraj11Points, setviraj11Points] = useState(10000);
+  let v11;
+  if (localStorage.getItem("viraj11") === null) {
+    v11 = [];
+  } else {
+    v11 = JSON.parse(localStorage.getItem("viraj11"));
+  }
+  const [viraj11, setviraj11] = useState(v11);
+
+  // end of viraj 11
+
+  // bhau11
+
+  const [bhau11Points, setbhau11Points] = useState(10000);
+  let bh11;
+  if (localStorage.getItem("bhau11") === null) {
+    bh11 = [];
+  } else {
+    bh11 = JSON.parse(localStorage.getItem("bhau11"));
+  }
+  const [bhau11, setbhau11] = useState(bh11);
+
+  // end of bhau11
+
+  // kaka11
+  const [kaka11Points, setkaka11Points] = useState(10000);
+  let k11;
+  if (localStorage.getItem("kaka11") === null) {
+    k11 = [];
+  } else {
+    k11 = JSON.parse(localStorage.getItem("kaka11"));
+  }
+  const [kaka11, setkaka11] = useState(k11);
+
+  // end of kaka11
+
+  //  end of teams points array
+
+  // State to manage the selected option
+  const [selectedTeam, setSelectedTeam] = useState(null);
+
+  // Function to handle changes in the selected option
+  const handleOptionChange = (event) => {
+    setSelectedTeam(event.target.value);
+  };
+
   // points function //
   const [points, setPoints] = useState(100);
 
@@ -67,17 +96,54 @@ function App() {
 
   // sold function
   const solded = () => {
-    let player = {
-      name: upl[item].Name,
-      sills: upl[item].SKILLS,
-      team: upl[item].Team,
-      points: points,
-    };
+    if (selectedTeam === null) {
+      alert("please select team");
+    } else {
+      // funciton for individual team
+      let playerTeam = {
+        name: upl[item].Name,
+        points: points,
+        Points_Remain: 0,
+      };
+      if (selectedTeam === "viraj") {
+        playerTeam.Points_Remain = viraj11Points - points;
+        setviraj11Points(playerTeam.Points_Remain);
+        setviraj11([...viraj11, playerTeam]);
+        // localStorage.setItem("viraj11", JSON.stringify(viraj11));
+      }
 
-    setSearch([...search, player]);
-    console.log(search);
-    setPoints(100);
-    next();
+      if (selectedTeam === "bhau") {
+        playerTeam.Points_Remain = bhau11Points - points;
+        setbhau11Points(playerTeam.Points_Remain);
+        setbhau11([...bhau11, playerTeam]);
+        // localStorage.setItem("bhau11", JSON.stringify(bhau11));
+      }
+
+      if (selectedTeam === "kaka") {
+        playerTeam.Points_Remain = kaka11Points - points;
+        setkaka11Points(playerTeam.Points_Remain);
+        setkaka11([...kaka11, playerTeam]);
+        // localStorage.setItem("kaka11", JSON.stringify(kaka11));
+      }
+
+      // end of funciton set individual team
+      let player = {
+        name: upl[item].Name,
+        sills: upl[item].SKILLS,
+        // team: upl[item].Team,
+        team: selectedTeam,
+        points: points,
+      };
+
+      setSearch([...search, player]);
+      setPoints(100);
+      console.log(kaka11);
+      console.log(bhau11);
+      console.log(viraj11);
+      console.log(search);
+      setSelectedTeam(null);
+      next();
+    }
   };
 
   // main array of player data
@@ -86,7 +152,10 @@ function App() {
   // useeffect
   useEffect(() => {
     localStorage.setItem("sold", JSON.stringify(search));
-  }, [search]);
+    localStorage.setItem("viraj11", JSON.stringify(viraj11));
+    localStorage.setItem("bhau11", JSON.stringify(bhau11));
+    localStorage.setItem("kaka11", JSON.stringify(kaka11));
+  }, [search, kaka11, bhau11, viraj11]);
 
   return (
     <>
@@ -113,10 +182,42 @@ function App() {
         <button
           onClick={() => {
             jsonToExcel(search, "upldata");
+            jsonToExcel(kaka11, "Kaka11");
+            jsonToExcel(bhau11, "Bhau11");
+            jsonToExcel(viraj11, "viraj11");
           }}
         >
           download
         </button>
+        <div>
+          <label className="">
+            <input
+              type="radio"
+              value="bhau"
+              checked={selectedTeam === "bhau"}
+              onChange={handleOptionChange}
+            />
+            Bhau
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="kaka"
+              checked={selectedTeam === "kaka"}
+              onChange={handleOptionChange}
+            />
+            kaka
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="viraj"
+              checked={selectedTeam === "viraj"}
+              onChange={handleOptionChange}
+            />
+            viraj
+          </label>
+        </div>
       </div>
     </>
   );
