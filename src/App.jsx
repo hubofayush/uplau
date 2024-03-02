@@ -189,33 +189,33 @@ function App() {
         >
           download
         </button>
-        <div>
-          <label className="">
+        <div className="d-flex  flex-row justify-content-center">
+          <label className="fs-5 m-2">
             <input
               type="radio"
               value="bhau"
               checked={selectedTeam === "bhau"}
               onChange={handleOptionChange}
-            />
-            Bhau
+            />{" "}
+            Bhau 11 ({bhau11Points})
           </label>
-          <label>
+          <label className="fs-5 m-2">
             <input
               type="radio"
               value="kaka"
               checked={selectedTeam === "kaka"}
               onChange={handleOptionChange}
-            />
-            kaka
+            />{" "}
+            kaka 11 ({kaka11Points})
           </label>
-          <label>
+          <label className="fs-5 m-2">
             <input
               type="radio"
               value="viraj"
               checked={selectedTeam === "viraj"}
               onChange={handleOptionChange}
-            />
-            viraj
+            />{" "}
+            Viraj 11 ({viraj11Points})
           </label>
         </div>
       </div>
