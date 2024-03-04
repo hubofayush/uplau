@@ -1,7 +1,8 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
+import Navbar from "./Components/Navbar";
+// import ModifyExcel from "./Components/ModifyExcel"
 
 function App() {
   // teams array
@@ -80,9 +81,15 @@ function App() {
   // end of local storage
 
   // main array to iterate over player csv file
-  const [item, setItem] = useState(0);
 
-  let i = 0;
+  let i;
+  if (localStorage.getItem("item") === null) {
+    i = 0;
+  } else {
+    i = JSON.parse(localStorage.getItem("item"));
+  }
+  const [item, setItem] = useState(i);
+
   const next = () => {
     if (item < upl.length - 1) {
       setItem(item + 1);
@@ -155,20 +162,33 @@ function App() {
     localStorage.setItem("viraj11", JSON.stringify(viraj11));
     localStorage.setItem("bhau11", JSON.stringify(bhau11));
     localStorage.setItem("kaka11", JSON.stringify(kaka11));
+    localStorage.setItem("item", JSON.stringify(item));
   }, [search, kaka11, bhau11, viraj11]);
 
   return (
     <>
       <div>
+        <Navbar
+          jsonToExcel={jsonToExcel}
+          search={search}
+          kaka11={kaka11}
+          bhau11={bhau11}
+          viraj11={viraj11}
+        />
+
         <iframe
+          className="mx-4 mt-4"
           src={upl[item].Photo}
-          width="640"
-          height="480"
+          width="600"
+          height="400"
           style={{ padding: "0" }}
         ></iframe>
-        <h1>{upl[item].Name}</h1>
-        <h2>{upl[item].SKILLS}</h2>
-        <h2>{upl[item].Team}</h2>
+
+        <div className="d-flex flex-column mx-4  justify-content-center">
+          <h1>{upl[item].Name}</h1>
+          <h2>{upl[item].SKILLS}</h2>
+          <h2>{upl[item].Team}</h2>
+        </div>
         <h1>{points}</h1>
         <button className="btn btn-warning mx-2 rounded " onClick={next}>
           Next Player
@@ -180,6 +200,7 @@ function App() {
           Increase
         </button>
         <button
+          className="btn btn-primary"
           onClick={() => {
             jsonToExcel(search, "upldata");
             jsonToExcel(kaka11, "Kaka11");
