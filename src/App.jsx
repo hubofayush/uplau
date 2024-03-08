@@ -3,12 +3,27 @@ import "./App.css";
 import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
-// import ModifyExcel from "./Components/ModifyExcel"
 
 function App() {
-  // teams array
+  // ** teams points array
+  let tp;
+  if (localStorage.getItem("Team_Points") === null) {
+    tp = [
+      {
+        vp: 30000,
+        bhp: 30000,
+        kp: 30000,
+      },
+    ];
+  } else {
+    tp = JSON.parse(localStorage.getItem("Team_Points"));
+  }
 
-  // viraj 11
+  const [TeamPoints, setTeamPoints] = useState(tp);
+
+  // * end of Team points array
+
+  // **  viraj 11
   let v11;
   // let pt;
   if (localStorage.getItem("viraj11") === null) {
@@ -19,13 +34,12 @@ function App() {
     // pt = v11[v11.length - 1].Points_Remain;
   }
   const [viraj11, setviraj11] = useState(v11);
-  const [viraj11Points, setviraj11Points] = useState(10000);
+  const [viraj11Points, setviraj11Points] = useState(TeamPoints[0].vp);
 
-  // end of viraj 11
+  // **  end of viraj 11
 
-  // bhau11
+  //** */ bhau11
 
-  const [bhau11Points, setbhau11Points] = useState(10000);
   let bh11;
   if (localStorage.getItem("bhau11") === null) {
     bh11 = [];
@@ -33,11 +47,11 @@ function App() {
     bh11 = JSON.parse(localStorage.getItem("bhau11"));
   }
   const [bhau11, setbhau11] = useState(bh11);
+  const [bhau11Points, setbhau11Points] = useState(TeamPoints[0].bhp);
 
-  // end of bhau11
+  // ** end of bhau11
 
-  // kaka11
-  const [kaka11Points, setkaka11Points] = useState(10000);
+  //**  */ kaka11
   let k11;
   if (localStorage.getItem("kaka11") === null) {
     k11 = [];
@@ -45,20 +59,21 @@ function App() {
     k11 = JSON.parse(localStorage.getItem("kaka11"));
   }
   const [kaka11, setkaka11] = useState(k11);
+  const [kaka11Points, setkaka11Points] = useState(TeamPoints[0].kp);
 
-  // end of kaka11
+  //**  */ end of kaka11
 
-  //  end of teams points array
+  // **  end of teams points array
 
-  // State to manage the selected option
+  //*/ State to manage the selected option
   const [selectedTeam, setSelectedTeam] = useState(null);
 
-  // Function to handle changes in the selected option
+  //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
     setSelectedTeam(event.target.value);
   };
 
-  // points function //
+  //* points function //
   const [points, setPoints] = useState(100);
 
   const increasePoints = () => {
@@ -72,9 +87,9 @@ function App() {
       setPoints(10000);
     }
   };
-  // end of point function
+  //* end of point function
 
-  // lcoalstoraage
+  //* lcoalstoraage
   let initsold;
 
   if (localStorage.getItem("sold") === null) {
@@ -82,9 +97,9 @@ function App() {
   } else {
     initsold = JSON.parse(localStorage.getItem("sold"));
   }
-  // end of local storage
+  //* end of local storage
 
-  // main array to iterate over player csv file
+  //* main array to iterate over player csv file
 
   let i;
   if (localStorage.getItem("item") === null) {
@@ -105,7 +120,7 @@ function App() {
     setPoints(100);
   };
 
-  // sold function
+  //* sold function
   const solded = () => {
     if (selectedTeam === null) {
       alert("please select team");
@@ -120,13 +135,15 @@ function App() {
         playerTeam.Points_Remain = viraj11Points - points;
         setviraj11Points(playerTeam.Points_Remain);
         setviraj11([...viraj11, playerTeam]);
-        // localStorage.setItem("viraj11", JSON.stringify(viraj11));
+        TeamPoints[0].vp = playerTeam.Points_Remain;
       }
 
       if (selectedTeam === "bhau") {
         playerTeam.Points_Remain = bhau11Points - points;
         setbhau11Points(playerTeam.Points_Remain);
         setbhau11([...bhau11, playerTeam]);
+        TeamPoints[0].bhp = playerTeam.Points_Remain;
+
         // localStorage.setItem("bhau11", JSON.stringify(bhau11));
       }
 
@@ -134,6 +151,8 @@ function App() {
         playerTeam.Points_Remain = kaka11Points - points;
         setkaka11Points(playerTeam.Points_Remain);
         setkaka11([...kaka11, playerTeam]);
+        TeamPoints[0].kp = playerTeam.Points_Remain;
+
         // localStorage.setItem("kaka11", JSON.stringify(kaka11));
       }
 
@@ -148,25 +167,45 @@ function App() {
 
       setSearch([...search, player]);
       setPoints(100);
-      console.log(kaka11);
-      console.log(bhau11);
-      console.log(viraj11);
-      console.log(search);
       setSelectedTeam(null);
       next();
     }
   };
 
-  // main array of player data
+  // * unsold function
+
+  let unsoldP;
+  if (localStorage.getItem("unSold_Players") === null) {
+    unsoldP = [];
+  } else {
+    unsoldP = JSON.parse(localStorage.getItem("Unsold_Players"));
+  }
+
+  const [unSoldPlayers, setunSoldPlayers] = useState(unsoldP);
+
+  const unSold = () => {
+    let unsoldPlayer = {
+      Name: upl[item].Name,
+      SKILLS: upl[item].SKILLS,
+      Team: upl[item].Team,
+      Photo: upl[item].Photo,
+    };
+
+    setunSoldPlayers([...unSoldPlayers, unsoldPlayer]);
+    next();
+  };
+  // * end of unsold function
+  //* main array of player data
   const [search, setSearch] = useState(initsold);
 
-  // useeffect
+  //* useeffect
   useEffect(() => {
     localStorage.setItem("sold", JSON.stringify(search));
     localStorage.setItem("viraj11", JSON.stringify(viraj11));
     localStorage.setItem("bhau11", JSON.stringify(bhau11));
     localStorage.setItem("kaka11", JSON.stringify(kaka11));
     localStorage.setItem("item", JSON.stringify(item));
+    localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
   }, [search, kaka11, bhau11, viraj11]);
 
   return (
@@ -178,7 +217,7 @@ function App() {
         bhau11={bhau11}
         viraj11={viraj11}
       />
-      <div className="d-flex flex-row " style={{ width: "100%" }}>
+      <div className="d-flex flex-row " style={{ width: "fit-content" }}>
         {/* // // left part // // */}
         <div className="left-part">
           <iframe
@@ -198,121 +237,130 @@ function App() {
         {/* end of left part  */}
         {/* right part  */}
         <div className="right-side d-flex flex-column justify-content-between me-auto">
-          <div
-            className="d-flex justify-content-center my-2"
-            style={{ flexDirection: "column", alignItems: "center" }}
-          >
-            <h1 className="text-center " style={{ fontSize: "8rem" }}>
-              {points}
-            </h1>
-            <button
-              className="btn btn-primary mx-2 w-25 rounded-pill  "
-              onClick={increasePoints}
+          <div className="d-flex flex-row justify-content-start">
+            <div
+              className="d-flex justify-content-center my-2"
+              style={{
+                flexDirection: "column",
+                alignItems: "center",
+                width: "25rem",
+              }}
             >
-              Increase
-            </button>
-          </div>
+              <h1 className="text-center " style={{ fontSize: "8rem" }}>
+                {points}
+              </h1>
+              <button
+                className="btn btn-primary mx-2 w-50  rounded-pill  "
+                onClick={increasePoints}
+              >
+                Increase
+              </button>
+            </div>
 
-          <div className="d-flex  flex-row justify-content-around flex-wrap">
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="bhau"
-                checked={selectedTeam === "bhau"}
-                onChange={handleOptionChange}
-              />{" "}
-              Bhau 11 ({bhau11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="kaka"
-                checked={selectedTeam === "kaka"}
-                onChange={handleOptionChange}
-              />{" "}
-              kaka 11 ({kaka11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
-            <label className="fs-5 m-2">
-              <input
-                type="radio"
-                value="viraj"
-                checked={selectedTeam === "viraj"}
-                onChange={handleOptionChange}
-              />{" "}
-              Viraj 11 ({viraj11Points})
-            </label>
+            <div
+              className="d-flex  flex-row justify-content-inline flex-wrap m-5"
+              style={{ width: "25rem" }}
+            >
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="bhau"
+                  checked={selectedTeam === "bhau"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Bhau 11 ({bhau11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="kaka"
+                  checked={selectedTeam === "kaka"}
+                  onChange={handleOptionChange}
+                />{" "}
+                kaka 11 ({kaka11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+              <label className="fs-5 m-2">
+                <input
+                  type="radio"
+                  value="viraj"
+                  checked={selectedTeam === "viraj"}
+                  onChange={handleOptionChange}
+                />{" "}
+                Viraj 11 ({viraj11Points})
+              </label>
+            </div>
           </div>
           <div className="d-flex flex-column " style={{ alignItems: "center" }}>
             <button
