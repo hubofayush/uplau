@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
@@ -8,14 +9,17 @@ function App() {
   // teams array
 
   // viraj 11
-  const [viraj11Points, setviraj11Points] = useState(10000);
   let v11;
+  // let pt;
   if (localStorage.getItem("viraj11") === null) {
     v11 = [];
+    // pt = 10000;
   } else {
     v11 = JSON.parse(localStorage.getItem("viraj11"));
+    // pt = v11[v11.length - 1].Points_Remain;
   }
   const [viraj11, setviraj11] = useState(v11);
+  const [viraj11Points, setviraj11Points] = useState(10000);
 
   // end of viraj 11
 
@@ -167,78 +171,163 @@ function App() {
 
   return (
     <>
-      <div>
-        <Navbar
-          jsonToExcel={jsonToExcel}
-          search={search}
-          kaka11={kaka11}
-          bhau11={bhau11}
-          viraj11={viraj11}
-        />
+      <Navbar
+        jsonToExcel={jsonToExcel}
+        search={search}
+        kaka11={kaka11}
+        bhau11={bhau11}
+        viraj11={viraj11}
+      />
+      <div className="d-flex flex-row " style={{ width: "100%" }}>
+        {/* // // left part // // */}
+        <div className="left-part">
+          <iframe
+            className="mx-2 mt-2"
+            src={upl[item].Photo}
+            width="500"
+            height="350"
+            style={{ padding: "0" }}
+          ></iframe>
 
-        <iframe
-          className="mx-4 mt-4"
-          src={upl[item].Photo}
-          width="600"
-          height="400"
-          style={{ padding: "0" }}
-        ></iframe>
+          <div className="d-flex flex-column mx-4  justify-content-center">
+            <h2 style={{ width: "auto" }}>{upl[item].Name}</h2>
+            <h3>{upl[item].SKILLS}</h3>
+            <h3>{upl[item].Team}</h3>
+          </div>
+        </div>
+        {/* end of left part  */}
+        {/* right part  */}
+        <div className="right-side d-flex flex-column justify-content-between me-auto">
+          <div
+            className="d-flex justify-content-center my-2"
+            style={{ flexDirection: "column", alignItems: "center" }}
+          >
+            <h1 className="text-center " style={{ fontSize: "8rem" }}>
+              {points}
+            </h1>
+            <button
+              className="btn btn-primary mx-2 w-25 rounded-pill  "
+              onClick={increasePoints}
+            >
+              Increase
+            </button>
+          </div>
 
-        <div className="d-flex flex-column mx-4  justify-content-center">
-          <h1>{upl[item].Name}</h1>
-          <h2>{upl[item].SKILLS}</h2>
-          <h2>{upl[item].Team}</h2>
+          <div className="d-flex  flex-row justify-content-around flex-wrap">
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="bhau"
+                checked={selectedTeam === "bhau"}
+                onChange={handleOptionChange}
+              />{" "}
+              Bhau 11 ({bhau11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="kaka"
+                checked={selectedTeam === "kaka"}
+                onChange={handleOptionChange}
+              />{" "}
+              kaka 11 ({kaka11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+            <label className="fs-5 m-2">
+              <input
+                type="radio"
+                value="viraj"
+                checked={selectedTeam === "viraj"}
+                onChange={handleOptionChange}
+              />{" "}
+              Viraj 11 ({viraj11Points})
+            </label>
+          </div>
+          <div className="d-flex flex-column " style={{ alignItems: "center" }}>
+            <button
+              className="btn btn-success rounded w-50 my-3 "
+              // style={{ marginBottom: "3rem" }}
+              onClick={solded}
+            >
+              Sold
+            </button>
+            <button className="btn btn-warning mx-2 rounded" onClick={next}>
+              Next Player
+            </button>
+          </div>
         </div>
-        <h1>{points}</h1>
-        <button className="btn btn-warning mx-2 rounded " onClick={next}>
-          Next Player
-        </button>
-        <button className="btn btn-success rounded" onClick={solded}>
-          Sold
-        </button>
-        <button className="btn btn-primary mx-2" onClick={increasePoints}>
-          Increase
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            jsonToExcel(search, "upldata");
-            jsonToExcel(kaka11, "Kaka11");
-            jsonToExcel(bhau11, "Bhau11");
-            jsonToExcel(viraj11, "viraj11");
-          }}
-        >
-          download
-        </button>
-        <div className="d-flex  flex-row justify-content-center">
-          <label className="fs-5 m-2">
-            <input
-              type="radio"
-              value="bhau"
-              checked={selectedTeam === "bhau"}
-              onChange={handleOptionChange}
-            />{" "}
-            Bhau 11 ({bhau11Points})
-          </label>
-          <label className="fs-5 m-2">
-            <input
-              type="radio"
-              value="kaka"
-              checked={selectedTeam === "kaka"}
-              onChange={handleOptionChange}
-            />{" "}
-            kaka 11 ({kaka11Points})
-          </label>
-          <label className="fs-5 m-2">
-            <input
-              type="radio"
-              value="viraj"
-              checked={selectedTeam === "viraj"}
-              onChange={handleOptionChange}
-            />{" "}
-            Viraj 11 ({viraj11Points})
-          </label>
-        </div>
+        {/* // end of right part // // */}
       </div>
     </>
   );
