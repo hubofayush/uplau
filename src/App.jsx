@@ -353,15 +353,6 @@ function App() {
                 />{" "}
                 Viraj 11 ({viraj11Points})
               </label>
-              <label className="fs-5 m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
             </div>
           </div>
           <div className="d-flex flex-column " style={{ alignItems: "center" }}>
