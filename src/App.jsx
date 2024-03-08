@@ -207,7 +207,7 @@ function App() {
     localStorage.setItem("item", JSON.stringify(item));
     localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
     localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
-  }, [search, kaka11, bhau11, viraj11]);
+  }, [search, kaka11, bhau11, viraj11, unSoldPlayers]);
 
   return (
     <>
@@ -217,6 +217,7 @@ function App() {
         kaka11={kaka11}
         bhau11={bhau11}
         viraj11={viraj11}
+        unSoldPlayers={unSoldPlayers}
       />
       <div className="d-flex flex-row " style={{ width: "fit-content" }}>
         {/* // // left part // // */}
@@ -371,8 +372,8 @@ function App() {
             >
               Sold
             </button>
-            <button className="btn btn-warning mx-2 rounded" onClick={next}>
-              Next Player
+            <button className="btn btn-danger mx-2 rounded" onClick={unSold}>
+              Unsold
             </button>
           </div>
         </div>

@@ -40,7 +40,20 @@ function Navbar(props) {
                         props.jsonToExcel(props.search, "sold players");
                       }}
                     >
-                      All Sold Player
+                      All Sold Players
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => {
+                        props.jsonToExcel(
+                          props.unSoldPlayers,
+                          "Unsold players"
+                        );
+                      }}
+                    >
+                      All Unsold Players
                     </button>
                   </li>
                   <li>
