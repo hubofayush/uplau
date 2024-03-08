@@ -239,7 +239,7 @@ function App() {
         {/* end of left part  */}
         {/* right part  */}
         <div className="right-side d-flex flex-column justify-content-between me-auto">
-          <div className="d-flex flex-row justify-content-start">
+          <div className="d-flex flex-row justify-content-start mt-5">
             <div
               className="d-flex justify-content-center my-2"
               style={{
@@ -260,7 +260,7 @@ function App() {
             </div>
 
             <div
-              className="d-flex  flex-row justify-content-inline flex-wrap m-5"
+              className="d-flex  flex-row justify-content-inline flex-wrap m-4 "
               style={{ width: "25rem" }}
             >
               <label className="fs-5 m-2">
