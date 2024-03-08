@@ -178,7 +178,7 @@ function App() {
   if (localStorage.getItem("unSold_Players") === null) {
     unsoldP = [];
   } else {
-    unsoldP = JSON.parse(localStorage.getItem("Unsold_Players"));
+    unsoldP = JSON.parse(localStorage.getItem("unSold_Players"));
   }
 
   const [unSoldPlayers, setunSoldPlayers] = useState(unsoldP);
