@@ -206,6 +206,7 @@ function App() {
     localStorage.setItem("kaka11", JSON.stringify(kaka11));
     localStorage.setItem("item", JSON.stringify(item));
     localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
+    localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
   }, [search, kaka11, bhau11, viraj11]);
 
   return (
