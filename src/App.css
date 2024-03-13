@@ -1,0 +1,29 @@
+/* .main_page { 
+background-image: url("src/assets/bcakground.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+} */
+
+@keyframes animate-towards-top {
+  0% {
+    transform: translateY(33px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.points_h1 {
+  animation: animate-towards-top 1s;
+  font-family: "Roboto", sans-serif;
+}
+
+#li {
+  font-size: medium;
+}
+
+.player_info {
+  font-size: small;
+}
