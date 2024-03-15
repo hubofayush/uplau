@@ -65,6 +65,21 @@ function App() {
 
   // **  end of teams points array
 
+  // * demo team array
+  let dt;
+  if (localStorage.getItem("teamsArray") === null) {
+    dt = [
+      { name: "Vraj 11", value: "viraj", points: viraj11Points },
+      { name: "bhau 11", value: "bhau", points: bhau11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+    ];
+  } else {
+    dt = JSON.parse(localStorage.getItem("teamsArray"));
+  }
+
+  const [teamArray, setteamArray] = useState(dt);
+  // * end of team array
+
   //*/ State to manage the selected option
   const [selectedTeam, setSelectedTeam] = useState(null);
 
@@ -135,14 +150,26 @@ function App() {
         playerTeam.Points_Remain = viraj11Points - points;
         setviraj11Points(playerTeam.Points_Remain);
         setviraj11([...viraj11, playerTeam]);
-        TeamPoints[0].vp = playerTeam.Points_Remain;
+        if (playerTeam.Points_Remain > 0) {
+          TeamPoints[0].vp = playerTeam.Points_Remain;
+          teamArray[0].points = playerTeam.Points_Remain;
+        } else {
+          TeamPoints[0].vp = 0;
+          teamArray[0].points = 0;
+        }
       }
 
       if (selectedTeam === "bhau") {
         playerTeam.Points_Remain = bhau11Points - points;
         setbhau11Points(playerTeam.Points_Remain);
         setbhau11([...bhau11, playerTeam]);
-        TeamPoints[0].bhp = playerTeam.Points_Remain;
+        if (playerTeam.Points_Remain > 0) {
+          TeamPoints[0].bhp = playerTeam.Points_Remain;
+          teamArray[1].points = playerTeam.Points_Remain;
+        } else {
+          TeamPoints[0].bhp = 0;
+          teamArray[1].points = 0;
+        }
 
         // localStorage.setItem("bhau11", JSON.stringify(bhau11));
       }
@@ -151,7 +178,13 @@ function App() {
         playerTeam.Points_Remain = kaka11Points - points;
         setkaka11Points(playerTeam.Points_Remain);
         setkaka11([...kaka11, playerTeam]);
-        TeamPoints[0].kp = playerTeam.Points_Remain;
+        if (playerTeam.Points_Remain > 0) {
+          TeamPoints[0].kp = playerTeam.Points_Remain;
+          teamArray[2].points = playerTeam.Points_Remain;
+        } else {
+          TeamPoints[0].kp = 0;
+          teamArray[2].points = 0;
+        }
 
         // localStorage.setItem("kaka11", JSON.stringify(kaka11));
       }
@@ -166,6 +199,7 @@ function App() {
       };
 
       setSearch([...search, player]);
+      console.log(teamArray);
       setPoints(100);
       setSelectedTeam(null);
       next();
@@ -208,15 +242,6 @@ function App() {
     localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
     localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
   }, [search, kaka11, bhau11, viraj11, unSoldPlayers]);
-
-  // * demo team array
-  const [demoTeam, setdemoTeam] = useState([
-    { name: "Kaka 11", value: "kaka11", points: kaka11Points },
-    { name: "Vraj 11", value: "viraj11", points: viraj11Points },
-    { name: "bhau 11", value: "bhau11", points: bhau11Points },
-  ]);
-
-  console.log(demoTeam);
 
   return (
     <>
