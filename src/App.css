@@ -6,7 +6,7 @@ background-size: cover;
 
 @keyframes animate-towards-top {
   0% {
-    transform: translateY(33px);
+    transform: translateY(28px);
     opacity: 0;
   }
   100% {

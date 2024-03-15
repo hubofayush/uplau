@@ -32,7 +32,7 @@ function Navbar(props) {
                 >
                   download
                 </a>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu" key={props.soldPlayers}>
                   <li>
                     <button
                       className="dropdown-item"

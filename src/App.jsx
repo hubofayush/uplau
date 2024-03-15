@@ -28,12 +28,6 @@ function App() {
 
   // ? end of all teams sold Array
 
-  // * end of Team points array
-
-  //**  */ end of kaka11
-
-  // **  end of teams points array
-
   // * demo team array
   let dt;
   if (localStorage.getItem("teamsArray") === null) {
@@ -139,13 +133,11 @@ function App() {
       let player = {
         name: upl[item].Name,
         sills: upl[item].SKILLS,
-        // team: upl[item].Team,
         team: selectedTeam,
         points: points,
       };
 
       setSearch([...search, player]);
-      // console.log(soldPlayers);
       setPoints(100);
       setSelectedTeam(null);
       next();
@@ -194,6 +186,7 @@ function App() {
         search={search}
         soldPlayers={soldPlayers}
         unSoldPlayers={unSoldPlayers}
+        key={search.name}
       />
       <div
         className="main_page  d-flex flex-row "
