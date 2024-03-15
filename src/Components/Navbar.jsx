@@ -56,36 +56,26 @@ function Navbar(props) {
                       All Unsold Players
                     </button>
                   </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.jsonToExcel(props.kaka11, "kaka11");
-                      }}
-                    >
-                      Kaka 11
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.jsonToExcel(props.viraj11, "viraj11");
-                      }}
-                    >
-                      Viraj 11
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        props.jsonToExcel(props.bhau11, "bhau11");
-                      }}
-                    >
-                      Bhau 11
-                    </button>
-                  </li>
+
+                  {props.soldPlayers?.map((team) => {
+                    return (
+                      <>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => {
+                              props.jsonToExcel(
+                                team.playersBought,
+                                `${team.name}`
+                              );
+                            }}
+                          >
+                            {team.name}
+                          </button>
+                        </li>
+                      </>
+                    );
+                  })}
                 </ul>
               </li>
             </ul>
