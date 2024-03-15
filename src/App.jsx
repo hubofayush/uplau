@@ -3,6 +3,7 @@ import "./App.css";
 import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
+import DisplayTeam from "./Components/DisplayTeam";
 
 function App() {
   // ** teams points array
@@ -241,6 +242,7 @@ function App() {
     localStorage.setItem("item", JSON.stringify(item));
     localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
     localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
+    localStorage.setItem("teamsArray", JSON.stringify(teamArray));
   }, [search, kaka11, bhau11, viraj11, unSoldPlayers]);
 
   return (
@@ -400,23 +402,19 @@ function App() {
                 />{" "}
                 Viraj 11 ({viraj11Points})
               </label>
-              {/* <div>
-                {demoTeam.map((e) => {
-                  return e.points > 0 ? (
-                    <label className=" m-2">
-                      <input
-                        type="radio"
-                        value={e.value}
-                        checked={selectedTeam === e.value}
-                        onChange={handleOptionChange}
-                      />{" "}
-                      {e.name} ({e.points})
-                    </label>
-                  ) : (
-                    <></>
-                  );
-                })}
-              </div> */}
+              {teamArray.map((team) => {
+                return (
+                  <>
+                    <DisplayTeam
+                      team={team}
+                      key={team.name}
+                      selectedTeam={selectedTeam}
+                      points={points}
+                      handleOptionChange={handleOptionChange}
+                    />
+                  </>
+                );
+              })}
             </div>
           </div>
           <div className="d-flex flex-column " style={{ alignItems: "center" }}>
