@@ -73,6 +73,13 @@ function App() {
       { name: "Vraj 11", value: "viraj", points: viraj11Points },
       { name: "bhau 11", value: "bhau", points: bhau11Points },
       { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
+      { name: "Kaka 11", value: "kaka", points: kaka11Points },
     ];
   } else {
     dt = JSON.parse(localStorage.getItem("teamsArray"));
@@ -147,6 +154,7 @@ function App() {
         points: points,
         Points_Remain: 0,
       };
+
       if (selectedTeam === "viraj") {
         playerTeam.Points_Remain = viraj11Points - points;
         setviraj11Points(playerTeam.Points_Remain);
@@ -312,7 +320,7 @@ function App() {
               className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
               style={{ width: "25rem" }}
             >
-              <label className="m-2">
+              {/* <label className="m-2">
                 <input
                   type="radio"
                   value="bhau"
@@ -401,13 +409,13 @@ function App() {
                   onChange={handleOptionChange}
                 />{" "}
                 Viraj 11 ({viraj11Points})
-              </label>
+              </label> */}
               {teamArray.map((team) => {
                 return (
                   <>
                     <DisplayTeam
                       team={team}
-                      key={team.name}
+                      key={team}
                       selectedTeam={selectedTeam}
                       points={points}
                       handleOptionChange={handleOptionChange}
