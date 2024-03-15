@@ -6,61 +6,29 @@ import Navbar from "./Components/Navbar";
 import DisplayTeam from "./Components/DisplayTeam";
 
 function App() {
-  // ** teams points array
-  // let tp;
-  // if (localStorage.getItem("Team_Points") === null) {
-  //   tp = [
-  //     {
-  //       vp: 30000,
-  //       bhp: 30000,
-  //       kp: 30000,
-  //     },
-  //   ];
-  // } else {
-  //   tp = JSON.parse(localStorage.getItem("Team_Points"));
-  // }
+  // ? all teams sold Array
 
-  // const [TeamPoints, setTeamPoints] = useState(tp);
+  let sp;
+  if (localStorage.getItem("soldPlayers") === null) {
+    sp = [
+      {
+        name: "viraj11",
+        playersBought: [],
+      },
+      {
+        name: "bhau11",
+        playersBought: [],
+      },
+      { name: "kaka11", playersBought: [] },
+    ];
+  } else {
+    sp = JSON.parse(localStorage.getItem("soldPlayers"));
+  }
+  const [soldPlayers, setsoldPlayers] = useState(sp);
+
+  // ? end of all teams sold Array
 
   // * end of Team points array
-
-  // **  viraj 11
-  let v11;
-  // let pt;
-  if (localStorage.getItem("viraj11") === null) {
-    v11 = [];
-    // pt = 10000;
-  } else {
-    v11 = JSON.parse(localStorage.getItem("viraj11"));
-    // pt = v11[v11.length - 1].Points_Remain;
-  }
-  const [viraj11, setviraj11] = useState(v11);
-  // const [viraj11Points, setviraj11Points] = useState(TeamPoints[0].vp);
-
-  // **  end of viraj 11
-
-  //** */ bhau11
-
-  let bh11;
-  if (localStorage.getItem("bhau11") === null) {
-    bh11 = [];
-  } else {
-    bh11 = JSON.parse(localStorage.getItem("bhau11"));
-  }
-  const [bhau11, setbhau11] = useState(bh11);
-  // const [bhau11Points, setbhau11Points] = useState(TeamPoints[0].bhp);
-
-  // ** end of bhau11
-
-  //**  */ kaka11
-  let k11;
-  if (localStorage.getItem("kaka11") === null) {
-    k11 = [];
-  } else {
-    k11 = JSON.parse(localStorage.getItem("kaka11"));
-  }
-  const [kaka11, setkaka11] = useState(k11);
-  // const [kaka11Points, setkaka11Points] = useState(TeamPoints[0].kp);
 
   //**  */ end of kaka11
 
@@ -70,9 +38,9 @@ function App() {
   let dt;
   if (localStorage.getItem("teamsArray") === null) {
     dt = [
-      { name: "Vraj 11", value: "viraj", points: 30000 },
-      { name: "bhau 11", value: "bhau", points: 30000 },
-      { name: "Kaka 11", value: "kaka", points: 30000 },
+      { name: "Vraj 11", value: "viraj11", points: 30000 },
+      { name: "bhau 11", value: "bhau11", points: 30000 },
+      { name: "Kaka 11", value: "kaka11", points: 30000 },
     ];
   } else {
     dt = JSON.parse(localStorage.getItem("teamsArray"));
@@ -141,55 +109,31 @@ function App() {
     if (selectedTeam === null) {
       alert("please select team");
     } else {
-      // funciton for individual team
+      // funciton for individual
       let playerTeam = {
         name: upl[item].Name,
         points: points,
         Points_Remain: 0,
       };
 
-      if (selectedTeam === "viraj") {
-        playerTeam.Points_Remain = teamArray[0].points - points;
-        // setviraj11Points(playerTeam.Points_Remain);
-        setviraj11([...viraj11, playerTeam]);
-        if (playerTeam.Points_Remain > 0) {
-          // TeamPoints[0].vp = playerTeam.Points_Remain;
-          teamArray[0].points = playerTeam.Points_Remain;
-        } else {
-          // TeamPoints[0].vp = 0;
-          teamArray[0].points = 0;
+      // ! dynamic creactin teams array object
+      for (let i = 0; i <= teamArray.length - 1; i++) {
+        if (teamArray[i].value === selectedTeam) {
+          playerTeam.Points_Remain = teamArray[i].points - points;
+
+          if (soldPlayers[i].name === selectedTeam) {
+            soldPlayers[i].playersBought.push(playerTeam);
+            console.log(soldPlayers);
+            if (playerTeam.Points_Remain > 0) {
+              teamArray[i].points = playerTeam.Points_Remain;
+              console.log(teamArray);
+            } else {
+              teamArray[i].points = 0;
+            }
+          }
         }
       }
-
-      if (selectedTeam === "bhau") {
-        playerTeam.Points_Remain = teamArray[1].points - points;
-        // setbhau11Points(playerTeam.Points_Remain);
-        setbhau11([...bhau11, playerTeam]);
-        if (playerTeam.Points_Remain > 0) {
-          // TeamPoints[0].bhp = playerTeam.Points_Remain;
-          teamArray[1].points = playerTeam.Points_Remain;
-        } else {
-          // TeamPoints[0].bhp = 0;
-          teamArray[1].points = 0;
-        }
-
-        // localStorage.setItem("bhau11", JSON.stringify(bhau11));
-      }
-
-      if (selectedTeam === "kaka") {
-        playerTeam.Points_Remain = teamArray[2].points - points;
-        // setkaka11Points(playerTeam.Points_Remain);
-        setkaka11([...kaka11, playerTeam]);
-        if (playerTeam.Points_Remain > 0) {
-          // TeamPoints[0].kp = playerTeam.Points_Remain;
-          teamArray[2].points = playerTeam.Points_Remain;
-        } else {
-          // TeamPoints[0].kp = 0;
-          teamArray[2].points = 0;
-        }
-
-        // localStorage.setItem("kaka11", JSON.stringify(kaka11));
-      }
+      // ! end of dynamic creactin teams array object
 
       // end of funciton set individual team
       let player = {
@@ -201,7 +145,7 @@ function App() {
       };
 
       setSearch([...search, player]);
-      // console.log(teamArray);
+      // console.log(soldPlayers);
       setPoints(100);
       setSelectedTeam(null);
       next();
@@ -237,23 +181,18 @@ function App() {
   //* useeffect
   useEffect(() => {
     localStorage.setItem("sold", JSON.stringify(search));
-    localStorage.setItem("viraj11", JSON.stringify(viraj11));
-    localStorage.setItem("bhau11", JSON.stringify(bhau11));
-    localStorage.setItem("kaka11", JSON.stringify(kaka11));
     localStorage.setItem("item", JSON.stringify(item));
-    // localStorage.setItem("Team_Points", JSON.stringify(TeamPoints));
     localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
     localStorage.setItem("teamsArray", JSON.stringify(teamArray));
-  }, [search, kaka11, bhau11, viraj11, unSoldPlayers]);
+    localStorage.setItem("soldPlayers", JSON.stringify(soldPlayers));
+  }, [search, soldPlayers, unSoldPlayers]);
 
   return (
     <>
       <Navbar
         jsonToExcel={jsonToExcel}
         search={search}
-        kaka11={kaka11}
-        bhau11={bhau11}
-        viraj11={viraj11}
+        soldPlayers={soldPlayers}
         unSoldPlayers={unSoldPlayers}
       />
       <div
