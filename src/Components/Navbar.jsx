@@ -1,13 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black">
         <div className="container-fluid">
-          <a className="navbar-brand fw-bold" style={{ color: "orange" }}>
+          <Link
+            className="navbar-brand fw-bold"
+            to="/"
+            style={{ color: "orange" }}
+          >
             UPL Season 01
-          </a>
+          </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -20,9 +26,17 @@ function Navbar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <a
+            <ul className="navbar-nav ">
+              <Link
+                className="nav-link fw-bold mr-5"
+                to="/AddNewTeam"
+                role="button"
+                style={{ color: "orange" }}
+              >
+                Add New Team
+              </Link>
+              <li className="nav-item dropdown ">
+                <Link
                   className="nav-link dropdown-toggle fw-bold"
                   href="#"
                   role="button"
@@ -31,7 +45,7 @@ function Navbar(props) {
                   style={{ color: "orange" }}
                 >
                   download
-                </a>
+                </Link>
                 <ul className="dropdown-menu" key={props.soldPlayers}>
                   <li>
                     <button
