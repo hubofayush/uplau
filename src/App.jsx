@@ -49,6 +49,9 @@ function App() {
   //*/ State to manage the selected option
   const [selectedTeam, setSelectedTeam] = useState(null);
 
+  // ! add new team
+  // ! end of add new team fucntion
+
   //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
     setSelectedTeam(event.target.value);
@@ -295,7 +298,13 @@ function App() {
               </>
             }
           />
-          <Route exact path="/addNewTeam" element={<AddNewTeam />}></Route>
+          <Route
+            exact
+            path="/addNewTeam"
+            element={
+              <AddNewTeam teamArray={teamArray} soldPlayers={soldPlayers} />
+            }
+          ></Route>
         </Routes>
       </Router>
     </>
