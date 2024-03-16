@@ -4,6 +4,7 @@ import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
 import DisplayTeam from "./Components/DisplayTeam";
+import Papa from "papaparse";
 
 function App() {
   // ? all teams sold Array
@@ -364,6 +365,22 @@ function App() {
             >
               Unsold
             </button>
+            {/* <input
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onChange={(e) => {
+                const files = e.target.files;
+                console.log(files);
+                if (files) {
+                  console.log(files[0]);
+                  Papa.parse(files[0], {
+                    complete: function (results) {
+                      console.log("Finished:", results.data);
+                    },
+                  });
+                }
+              }}
+            ></input> */}
           </div>
         </div>
         {/* // end of right part // // */}
