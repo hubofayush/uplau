@@ -5,6 +5,8 @@ import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
 import DisplayTeam from "./Components/DisplayTeam";
 import Papa from "papaparse";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddNewTeam from "./Components/AddNewTeam";
 
 function App() {
   // ? all teams sold Array
@@ -182,209 +184,120 @@ function App() {
 
   return (
     <>
-      <Navbar
-        jsonToExcel={jsonToExcel}
-        search={search}
-        soldPlayers={soldPlayers}
-        unSoldPlayers={unSoldPlayers}
-        key={search.name}
-      />
-      <div
-        className="main_page  d-flex flex-row "
-        style={{ width: "fit-content" }}
-      >
-        {/* // // left part // // */}
-        <div className="left-part">
-          <iframe
-            className="mx-4 mt-4 rounded-1"
-            src={upl[item].Photo}
-            width="500"
-            height="350"
-            style={{
-              padding: "0",
-              boxShadow: "8px 10px 10px rgba(0,0,0,.3)",
-            }}
-          />
+      <Router>
+        <Navbar
+          jsonToExcel={jsonToExcel}
+          search={search}
+          soldPlayers={soldPlayers}
+          unSoldPlayers={unSoldPlayers}
+          key={search.name}
+        />
 
-          <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  tw-bold text-center">
-            <h3 style={{ width: "auto" }}>{upl[item].Name}</h3>
-            <h4>{upl[item].SKILLS}</h4>
-            <h5>{upl[item].Team}</h5>
-          </div>
-        </div>
-        {/* end of left part  */}
-        {/* right part  */}
-        <div
-          className="right-side d-flex flex-column justify-content-start"
-          style={{ width: "50rem" }}
-        >
-          <div className="d-flex flex-row justify-content-start mt-5">
-            <div
-              className="d-flex justify-content-center my-2"
-              style={{
-                flexDirection: "column",
-                alignItems: "center",
-                width: "25rem",
-              }}
-            >
-              <h1
-                className="points_h1 text-center "
-                style={{ fontSize: "8rem" }}
-                key={points}
-              >
-                {points}
-              </h1>
-              <button
-                className="btn btn-primary mx-2 w-50  rounded-pill  "
-                onClick={increasePoints}
-              >
-                Increase
-              </button>
-            </div>
-
-            <div
-              className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
-              style={{ width: "25rem" }}
-            >
-              {/* <label className="m-2">
-                <input
-                  type="radio"
-                  value="bhau"
-                  checked={selectedTeam === "bhau"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Bhau 11 ({bhau11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="kaka"
-                  checked={selectedTeam === "kaka"}
-                  onChange={handleOptionChange}
-                />{" "}
-                kaka 11 ({kaka11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label>
-              <label className=" m-2">
-                <input
-                  type="radio"
-                  value="viraj"
-                  checked={selectedTeam === "viraj"}
-                  onChange={handleOptionChange}
-                />{" "}
-                Viraj 11 ({viraj11Points})
-              </label> */}
-              {teamArray.map((team) => {
-                return (
-                  <>
-                    <DisplayTeam
-                      team={team}
-                      key={team}
-                      selectedTeam={selectedTeam}
-                      points={points}
-                      handleOptionChange={handleOptionChange}
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <div
+                  className="main_page  d-flex flex-row "
+                  style={{ width: "fit-content" }}
+                >
+                  {/* // // left part // // */}
+                  <div className="left-part">
+                    <iframe
+                      className="mx-4 mt-4 rounded-1"
+                      src={upl[item].Photo}
+                      width="500"
+                      height="350"
+                      style={{
+                        padding: "0",
+                        boxShadow: "8px 10px 10px rgba(0,0,0,.3)",
+                      }}
                     />
-                  </>
-                );
-              })}
-            </div>
-          </div>
-          <div className="d-flex flex-column " style={{ alignItems: "center" }}>
-            <button
-              className="btn btn-success rounded w-75 my-3 "
-              // style={{ marginBottom: "3rem" }}
-              onClick={solded}
-            >
-              Sold
-            </button>
-            <button
-              className="btn btn-danger w-25 mx-2 rounded"
-              onClick={unSold}
-            >
-              Unsold
-            </button>
-            {/* <input
-              type="file"
-              accept=".csv,.xlsx,.xls"
-              onChange={(e) => {
-                const files = e.target.files;
-                console.log(files);
-                if (files) {
-                  console.log(files[0]);
-                  Papa.parse(files[0], {
-                    complete: function (results) {
-                      console.log("Finished:", results.data);
-                    },
-                  });
-                }
-              }}
-            ></input> */}
-          </div>
-        </div>
-        {/* // end of right part // // */}
-      </div>
+
+                    <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  tw-bold text-center">
+                      <h3 style={{ width: "auto" }}>{upl[item].Name}</h3>
+                      <h4>{upl[item].SKILLS}</h4>
+                      <h5>{upl[item].Team}</h5>
+                    </div>
+                  </div>
+                  {/* end of left part  */}
+                  {/* right part  */}
+                  <div
+                    className="right-side d-flex flex-column justify-content-start"
+                    style={{ width: "50rem" }}
+                  >
+                    <div className="d-flex flex-row justify-content-start mt-5">
+                      <div
+                        className="d-flex justify-content-center my-2"
+                        style={{
+                          flexDirection: "column",
+                          alignItems: "center",
+                          width: "25rem",
+                        }}
+                      >
+                        <h1
+                          className="points_h1 text-center "
+                          style={{ fontSize: "8rem" }}
+                          key={points}
+                        >
+                          {points}
+                        </h1>
+                        <button
+                          className="btn btn-primary mx-2 w-50  rounded-pill  "
+                          onClick={increasePoints}
+                        >
+                          Increase
+                        </button>
+                      </div>
+
+                      <div
+                        className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
+                        style={{ width: "25rem" }}
+                      >
+                        {teamArray.map((team) => {
+                          return (
+                            <>
+                              <DisplayTeam
+                                team={team}
+                                key={team}
+                                selectedTeam={selectedTeam}
+                                points={points}
+                                handleOptionChange={handleOptionChange}
+                              />
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div
+                      className="d-flex flex-column "
+                      style={{ alignItems: "center" }}
+                    >
+                      <button
+                        className="btn btn-success rounded w-75 my-3 "
+                        // style={{ marginBottom: "3rem" }}
+                        onClick={solded}
+                      >
+                        Sold
+                      </button>
+                      <button
+                        className="btn btn-danger w-25 mx-2 rounded"
+                        onClick={unSold}
+                      >
+                        Unsold
+                      </button>
+                    </div>
+                  </div>
+                  {/* // end of right part // // */}
+                </div>
+              </>
+            }
+          />
+          <Route exact path="/addNewTeam" element={<AddNewTeam />}></Route>
+        </Routes>
+      </Router>
     </>
   );
 }
