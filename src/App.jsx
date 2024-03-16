@@ -14,15 +14,15 @@ function App() {
   let sp;
   if (localStorage.getItem("soldPlayers") === null) {
     sp = [
-      {
-        name: "viraj11",
-        playersBought: [],
-      },
-      {
-        name: "bhau11",
-        playersBought: [],
-      },
-      { name: "kaka11", playersBought: [] },
+      // {
+      //   name: "viraj11",
+      //   playersBought: [],
+      // },
+      // {
+      //   name: "bhau11",
+      //   playersBought: [],
+      // },
+      // { name: "kaka11", playersBought: [] },
     ];
   } else {
     sp = JSON.parse(localStorage.getItem("soldPlayers"));
@@ -35,9 +35,9 @@ function App() {
   let dt;
   if (localStorage.getItem("teamsArray") === null) {
     dt = [
-      { name: "Vraj 11", value: "viraj11", points: 30000 },
-      { name: "bhau 11", value: "bhau11", points: 30000 },
-      { name: "Kaka 11", value: "kaka11", points: 30000 },
+      // { name: "Vraj 11", value: "viraj11", points: 30000 },
+      // { name: "bhau 11", value: "bhau11", points: 30000 },
+      // { name: "Kaka 11", value: "kaka11", points: 30000 },
     ];
   } else {
     dt = JSON.parse(localStorage.getItem("teamsArray"));

@@ -19,7 +19,7 @@ function AddNewTeam(props) {
       };
 
       props.addNewTeam(nt);
-      navigate("/");
+      // navigate("/");
 
       setname("");
       setpoints("");
