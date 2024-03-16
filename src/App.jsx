@@ -46,11 +46,29 @@ function App() {
   const [teamArray, setteamArray] = useState(dt);
   // * end of team array
 
+  // ! add new team
+  const addNewTeam = (team) => {
+    // console.log("addNewTeam", team)
+    let newTeam1 = {
+      name: team.name,
+      playersBought: [],
+    };
+
+    setsoldPlayers([...soldPlayers, newTeam1]);
+
+    let newTeam2 = {
+      name: team.name,
+      value: team.name,
+      points: team.points,
+    };
+
+    setteamArray([...teamArray, newTeam2]);
+  };
+
+  // ! end of add new team fucntion
+
   //*/ State to manage the selected option
   const [selectedTeam, setSelectedTeam] = useState(null);
-
-  // ! add new team
-  // ! end of add new team fucntion
 
   //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
@@ -301,9 +319,7 @@ function App() {
           <Route
             exact
             path="/addNewTeam"
-            element={
-              <AddNewTeam teamArray={teamArray} soldPlayers={soldPlayers} />
-            }
+            element={<AddNewTeam addNewTeam={addNewTeam} />}
           ></Route>
         </Routes>
       </Router>
