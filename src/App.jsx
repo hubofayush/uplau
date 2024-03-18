@@ -5,10 +5,12 @@ import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
 import DisplayTeam from "./Components/DisplayTeam";
 import Papa from "papaparse";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
 
 function App() {
+  // * use Navigate
+
   // ? all teams sold Array
 
   let sp;
@@ -277,19 +279,35 @@ function App() {
                         className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
                         style={{ width: "25rem" }}
                       >
-                        {teamArray.map((team) => {
-                          return (
-                            <>
-                              <DisplayTeam
-                                team={team}
-                                key={team}
-                                selectedTeam={selectedTeam}
-                                points={points}
-                                handleOptionChange={handleOptionChange}
-                              />
-                            </>
-                          );
-                        })}
+                        {teamArray.length === 0 ? (
+                          <span>
+                            <Link
+                              to="/AddNewTeam"
+                              style={{
+                                textDecoration: "none",
+                                color: "white",
+                              }}
+                            >
+                              <button className="btn btn-warning rounded">
+                                Add new Teams
+                              </button>
+                            </Link>
+                          </span>
+                        ) : (
+                          teamArray.map((team) => {
+                            return (
+                              <>
+                                <DisplayTeam
+                                  team={team}
+                                  key={team}
+                                  selectedTeam={selectedTeam}
+                                  points={points}
+                                  handleOptionChange={handleOptionChange}
+                                />
+                              </>
+                            );
+                          })
+                        )}
                       </div>
                     </div>
                     <div
