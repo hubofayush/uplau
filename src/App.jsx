@@ -7,9 +7,11 @@ import DisplayTeam from "./Components/DisplayTeam";
 import Papa from "papaparse";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
+import FetchCSVData from "./Components/FetchCSVData";
 
 function App() {
-  // * use Navigate
+  // * link for sheet file
+  let link = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSb_AfFr4QBuSzsgJa2_He0gAi5dyCHSAyvhkEKC2pjvXHQt65uYxEmYPlFUm9JD-9aAllNItE7gYhW/pub?output=csv'
 
   // ? all teams sold Array
 
@@ -349,6 +351,7 @@ function App() {
           ></Route>
         </Routes>
       </Router>
+      <FetchCSVData link = {link}/>
     </>
   );
 }
