@@ -41,6 +41,7 @@ function AddNewTeam(props) {
             onChange={(e) => {
               setname(e.target.value);
             }}
+            autoFocus
           />
         </div>
         <div className="mb-3">
