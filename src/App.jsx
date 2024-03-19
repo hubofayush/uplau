@@ -313,20 +313,28 @@ function App() {
                     <div
                       className="d-flex flex-column "
                       style={{ alignItems: "center" }}
-                    >
+                    > {teamArray.length === 0 ? ( <>
+                    <Link to='/AddNewTeam' style={{textDecoration:'none' , color:'orange' ,fontSize:'20px',fontFamily:'roboto'}}>
+                         Please Add Teams
+                    </Link>
+                    </>) : 
+                    <>
+
                       <button
-                        className="btn btn-success rounded w-75 my-3 "
-                        // style={{ marginBottom: "3rem" }}
-                        onClick={solded}
+                      className="btn btn-success rounded w-75 my-3 "
+                      // style={{ marginBottom: "3rem" }}
+                      onClick={solded}
                       >
                         Sold
                       </button>
                       <button
-                        className="btn btn-danger w-25 mx-2 rounded"
-                        onClick={unSold}
+                      className="btn btn-danger w-25 mx-2 rounded"
+                      onClick={unSold}
                       >
                         Unsold
                       </button>
+                        </>
+                        }
                     </div>
                   </div>
                   {/* // end of right part // // */}
