@@ -219,6 +219,16 @@ function App() {
     localStorage.setItem("soldPlayers", JSON.stringify(soldPlayers));
   }, [search, soldPlayers, unSoldPlayers]);
 
+  // * photo link
+  let newImgLink = "";
+  if (JSON_data.length > 0) {
+    let imgLink = JSON_data[item].Photo;
+    imgLink = imgLink.slice(33);
+    let linkHead = "https://drive.google.com/thumbnail?id=";
+    newImgLink = linkHead.concat(imgLink);
+    console.log(newImgLink);
+  }
+
   return (
     <>
       <Router>
@@ -238,7 +248,10 @@ function App() {
               <>
                 {JSON_data.length === 0 ? (
                   <>
-                    <FetchCSVData JSON_data = {JSON_data} setJSON_data = {setJSON_data} />
+                    <FetchCSVData
+                      JSON_data={JSON_data}
+                      setJSON_data={setJSON_data}
+                    />
                   </>
                 ) : (
                   <>
@@ -248,9 +261,9 @@ function App() {
                     >
                       {/* // // left part // // */}
                       <div className="left-part">
-                        <iframe
+                        <img
                           className="mx-4 mt-4 rounded-1"
-                          src={upl[item].Photo}
+                          src={newImgLink}
                           width="500"
                           height="350"
                           style={{
