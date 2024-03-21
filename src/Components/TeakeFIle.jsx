@@ -1,6 +1,4 @@
-
 import axios from "axios"; // Import Axios
-
 
 import React, { useEffect, useState } from "react";
 
@@ -37,15 +35,14 @@ export default function TakeFIle(props) {
         rowObject[headers[j]] = rowData[j];
       }
       data.push(rowObject);
-    }    
+    }
     return data;
   }
-    console.log(props.JOSN_data)
+  props.setJSON_data(csvData);
+  console.log(props.JOSN_data);
 
   useEffect(() => {
     localStorage.setItem("JSON_data", JSON.stringify(csvData));
-    props.setJSON_data(csvData)
-    
   }, [csvData]);
 
   return (
