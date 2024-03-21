@@ -128,7 +128,7 @@ function App() {
   const [item, setItem] = useState(i);
 
   const next = () => {
-    if (item < upl.length - 1) {
+    if (item < JSON_data.length - 1) {
       setItem(item + 1);
       console.log(item);
     } else {
@@ -145,7 +145,7 @@ function App() {
     } else {
       // funciton for individual
       let playerTeam = {
-        name: upl[item].Name,
+        name: JSON_data[item].Name,
         points: points,
         Points_Remain: 0,
       };
@@ -171,8 +171,8 @@ function App() {
 
       // end of funciton set individual team
       let player = {
-        name: upl[item].Name,
-        sills: upl[item].SKILLS,
+        name: JSON_data[item].Name,
+        sills: JSON_data[item].SKILLS,
         team: selectedTeam,
         points: points,
       };
@@ -197,10 +197,10 @@ function App() {
 
   const unSold = () => {
     let unsoldPlayer = {
-      Name: upl[item].Name,
-      SKILLS: upl[item].SKILLS,
-      Team: upl[item].Team,
-      Photo: upl[item].Photo,
+      Name: JSON_data[item].Name,
+      SKILLS: JSON_data[item].SKILLS,
+      Team: JSON_data[item].Team,
+      Photo: JSON_data[item].Photo,
     };
 
     setunSoldPlayers([...unSoldPlayers, unsoldPlayer]);
@@ -226,7 +226,7 @@ function App() {
     imgLink = imgLink.slice(33);
     let linkHead = "https://drive.google.com/thumbnail?id=";
     newImgLink = linkHead.concat(imgLink);
-    console.log(newImgLink);
+    // console.log(newImgLink);/
   }
 
   return (
@@ -273,9 +273,11 @@ function App() {
                         />
 
                         <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  tw-bold text-center">
-                          <h3 style={{ width: "auto" }}>{upl[item].Name}</h3>
-                          <h4>{upl[item].SKILLS}</h4>
-                          <h5>{upl[item].Team}</h5>
+                          <h3 style={{ width: "auto" }}>
+                            {JSON_data[item].Name}
+                          </h3>
+                          <h4>{JSON_data[item].SKILLS}</h4>
+                          <h5>{JSON_data[item].Team}</h5>
                         </div>
                       </div>
                       {/* end of left part  */}
