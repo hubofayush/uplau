@@ -238,7 +238,7 @@ function App() {
               <>
                 {JSON_data.length === 0 ? (
                   <>
-                    <FetchCSVData />
+                    <FetchCSVData JSON_data = {JSON_data} setJSON_data = {setJSON_data} />
                   </>
                 ) : (
                   <>
