@@ -80,7 +80,7 @@ export default function TakeFIle(props) {
   };
   // console.log(userJSON);
   const handleCSVUpload = (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     setUploadedCSV(e.target.files[0]);
   };
 
