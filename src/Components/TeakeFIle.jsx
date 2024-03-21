@@ -38,11 +38,11 @@ export default function TakeFIle(props) {
     }
     return data;
   }
-  props.setJSON_data(csvData);
   console.log(props.JOSN_data);
 
   useEffect(() => {
     localStorage.setItem("JSON_data", JSON.stringify(csvData));
+    props.setJSON_data(csvData);
   }, [csvData]);
 
   return (
