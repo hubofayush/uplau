@@ -221,12 +221,14 @@ function App() {
 
   // * photo link
   let newImgLink = "";
+  let finalImgLink = "";
   if (JSON_data.length > 0) {
     let imgLink = JSON_data[item].Photo;
     imgLink = imgLink.slice(33);
     let linkHead = "https://drive.google.com/thumbnail?id=";
     newImgLink = linkHead.concat(imgLink);
-    // console.log(newImgLink);/
+    // finalImgLink = `${newImgLink}/preview`;
+    console.log(newImgLink);
   }
 
   return (
@@ -266,6 +268,8 @@ function App() {
                           src={newImgLink}
                           width="500"
                           height="350"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
                           style={{
                             padding: "0",
                             boxShadow: "8px 10px 10px rgba(0,0,0,.3)",
