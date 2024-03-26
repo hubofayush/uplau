@@ -65,6 +65,39 @@ export default function TakeFIle(props) {
 
   const [userJSON, setUserJSON] = useState([]);
   const [uploadedCSV, setUploadedCSV] = useState();
+  const [uploadFolder, setUploadFolder] = useState();
+  const [imagePath, setimagePath] = useState([]);
+
+  const handleFolderSubmit = (e) => {
+    console.log(uploadFolder);
+
+    for (let i = 0; i < uploadFolder.length; i++) {
+      imagePath.push(uploadFolder[i].webkitRelativePath);
+      // console.log(uploadFolder[i].webkitRelativePath);
+    }
+    console.log(uploadFolder);
+    console.log(imagePath);
+
+    // let path = imagePath
+    //   .filter((e) => {
+    //     return e.includes("Gitesh");
+    //   })
+    //   .toString();
+    // console.log(typeof path);
+  };
+  const filereader = new FileReader();
+  const handleFolderUpload = (event) => {
+    setUploadFolder(event.target.files);
+    // console.log(event.target.files);
+    filereader.readAsDataURL(event.target.files);
+    filereader.onload = function () {
+      var fileContent = filereader.result;
+      console.log(fileContent);
+    };
+    // for (let i = 0; i < uploadFolder.length; i++) {
+    //   console.log(uploadFolder[i].webkitRelativePath);
+    //   // console.log(i);
+  };
 
   const handleCSVSubmit = (e) => {
     // e.prevetnDefault();
@@ -86,8 +119,10 @@ export default function TakeFIle(props) {
 
   useEffect(() => {
     localStorage.setItem("JSON_data", JSON.stringify(userJSON));
+    localStorage.setItem("ImagePath", JSON.stringify(imagePath));
     props.setJSON_data(userJSON);
-  }, [userJSON]);
+    props.setPath(imagePath);
+  }, [userJSON, imagePath]);
 
   return (
     <div
@@ -139,6 +174,34 @@ export default function TakeFIle(props) {
           Upload
         </label>
       </div> */}
+      <div>
+        <input
+          type="file"
+          className=""
+          webkitdirectory="true"
+          multiple="multiple"
+          onChange={handleFolderUpload}
+          mozfullpath="true"
+        />
+
+        <button
+          className="btn btn-success"
+          onClick={(e) => {
+            handleFolderSubmit(e);
+          }}
+        >
+          Upload
+        </button>
+        {/* <label for="folder">Select folder</label>
+        <input
+          type="file"
+          id="folder"
+          multiple
+          onChange={(e) => {
+            handleFolderUpload(e);
+          }}
+        /> */}
+      </div>
     </div>
   );
 }

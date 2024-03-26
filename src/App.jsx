@@ -19,11 +19,19 @@ function App() {
   }
 
   const [JSON_data, setJSON_data] = useState(data);
+
   // end of  section for insert the link of google sheets
 
-  // * link for sheet file
-  let link =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSb_AfFr4QBuSzsgJa2_He0gAi5dyCHSAyvhkEKC2pjvXHQt65uYxEmYPlFUm9JD-9aAllNItE7gYhW/pub?output=csv";
+  // * image folder and image file
+  let imagepath;
+  if (localStorage.getItem("ImagePath") === null) {
+    imagepath = [];
+  } else {
+    imagepath = JSON.parse(localStorage.getItem("ImagePath"));
+  }
+  const [path, setpath] = useState(imagepath);
+  console.log(path);
+  // * end of image folder and image file
 
   // ? all teams sold Array
 
@@ -223,12 +231,22 @@ function App() {
   let newImgLink = "";
   let finalImgLink = "";
   if (JSON_data.length > 0) {
-    let imgLink = JSON_data[item].Photo;
-    imgLink = imgLink.slice(33);
-    let linkHead = "https://drive.google.com/thumbnail?id=";
-    newImgLink = linkHead.concat(imgLink);
-    // finalImgLink = `${newImgLink}/preview`;
-    console.log(newImgLink);
+    // let imgLink = JSON_data[item].Photo;
+    // imgLink = imgLink.slice(33);
+    // let linkHead = "https://drive.google.com/thumbnail?id=";
+    // newImgLink = linkHead.concat(imgLink);
+    // // finalImgLink = `${newImgLink}/preview`;
+    // console.log(newImgLink);
+
+    let name = JSON_data[item].Name.toString();
+    name = name.split(" ");
+
+    finalImgLink = path
+      .filter((e) => {
+        return e.includes(`${name[0]} ${name[2]}`);
+      })
+      .toString();
+    console.log(finalImgLink);
   }
 
   return (
@@ -239,7 +257,7 @@ function App() {
           search={search}
           soldPlayers={soldPlayers}
           unSoldPlayers={unSoldPlayers}
-          key={search.name}
+          key={search.Name}
         />
 
         <Routes>
@@ -253,6 +271,7 @@ function App() {
                     <FetchCSVData
                       JSON_data={JSON_data}
                       setJSON_data={setJSON_data}
+                      setPath={setpath}
                     />
                   </>
                 ) : (
@@ -265,7 +284,7 @@ function App() {
                       <div className="left-part">
                         <img
                           className="mx-4 mt-4 rounded-1"
-                          src={newImgLink}
+                          src="src/assets/uplPhoo/20230910_080635 - Bhavesh Dorlekar.jpg"
                           width="500"
                           height="350"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
