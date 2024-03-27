@@ -98,6 +98,7 @@ function App() {
   //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
     setSelectedTeam(event.target.value);
+    increasePoints();
   };
 
   //* points function //
@@ -363,6 +364,7 @@ function App() {
                                       selectedTeam={selectedTeam}
                                       points={points}
                                       handleOptionChange={handleOptionChange}
+                                      increasePoints = {increasePoints}
                                     />
                                   </>
                                 );

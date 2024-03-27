@@ -3,7 +3,7 @@ import React from "react";
 function DisplayTeam(props) {
   return (
     <>
-      {props.team.points > props.points ? (
+      {props.team.points >= props.points ? (
         <label className=" m-2">
           <input
             type="radio"
