@@ -87,6 +87,7 @@ function App() {
     };
 
     setteamArray([...teamArray, newTeam2]);
+    alert('Team Added Successfully')
   };
 
   // ! end of add new team fucntion
@@ -228,7 +229,7 @@ function App() {
   }, [search, soldPlayers, unSoldPlayers]);
 
   // * photo link
-  let newImgLink = "";
+  // let newImgLink = "";
   let linkHead;
   // let finalImgLink = "";
   if (JSON_data.length > 0) {
