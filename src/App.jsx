@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import upl from "./csvjson.json";
+// import upl from "./csvjson.json";
 import jsonToExcel from "./Components/convertor";
 import Navbar from "./Components/Navbar";
 import DisplayTeam from "./Components/DisplayTeam";
-import Papa from "papaparse";
+// import Papa from "papaparse";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
 import FetchCSVData from "./Components/TeakeFIle";
@@ -87,7 +87,7 @@ function App() {
     };
 
     setteamArray([...teamArray, newTeam2]);
-    alert('Team Added Successfully')
+    alert("Team Added Successfully");
   };
 
   // ! end of add new team fucntion
@@ -98,7 +98,10 @@ function App() {
   //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
     setSelectedTeam(event.target.value);
-    increasePoints();
+    if (points > 100) {
+      increasePoints();
+    } else {
+    }
   };
 
   //* points function //
@@ -236,7 +239,7 @@ function App() {
   if (JSON_data.length > 0) {
     let imgLink = JSON_data[item].Photo;
     // imgLink = imgLink.slice(33);
-     linkHead = `https://drive.google.com/thumbnail?id=${imgLink.slice(33)}`;
+    linkHead = `https://drive.google.com/thumbnail?id=${imgLink.slice(33)}`;
     // newImgLink = linkHead.concat(imgLink);
     // // finalImgLink = `${newImgLink}/preview`;
     // console.log(newImgLink);
@@ -364,7 +367,7 @@ function App() {
                                       selectedTeam={selectedTeam}
                                       points={points}
                                       handleOptionChange={handleOptionChange}
-                                      increasePoints = {increasePoints}
+                                      increasePoints={increasePoints}
                                     />
                                   </>
                                 );
