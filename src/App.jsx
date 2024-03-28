@@ -8,6 +8,7 @@ import DisplayTeam from "./Components/DisplayTeam";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
 import FetchCSVData from "./Components/TeakeFIle";
+import UtkHeader from "./Components/UtkHeader";
 
 function App() {
   // section for insert the link of google sheets
@@ -282,6 +283,7 @@ function App() {
                   </>
                 ) : (
                   <>
+                    <UtkHeader />
                     <div className="main_page  d-flex flex-row ">
                       {/* // // left part // // */}
                       <div className="left-part">
