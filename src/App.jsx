@@ -284,14 +284,14 @@ function App() {
                 ) : (
                   <>
                     <UtkHeader />
-                    <div className="main_page  d-flex flex-row ">
+                    <div className="main_page  d-flex row">
                       {/* // // left part // // */}
-                      <div className="left-part">
+                      <div className="left-part col">
                         <img
                           className="mx-4 mt-4 rounded-3  "
                           src={linkHead}
-                          width="200"
-                          height="150"
+                          width="300"
+                          height="250"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           style={{
@@ -311,10 +311,10 @@ function App() {
                       {/* end of left part  */}
                       {/* right part  */}
                       <div
-                        className="right-side d-flex flex-column justify-content-start"
+                        className="right-side col d-flex flex-column justify-content-start"
                         style={{ width: "50rem" }}
                       >
-                        <div className="d-flex flex-row justify-content-start mt-5">
+                        <div className="d-flex flex-row justify-content-start align-items-center mt-5">
                           <div
                             className="d-flex justify-content-center my-2"
                             style={{
@@ -337,42 +337,47 @@ function App() {
                               Increase
                             </button>
                           </div>
-
-                          <div
-                            className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
-                            style={{ width: "25rem" }}
-                          >
-                            {teamArray.length === 0 ? (
-                              <span>
-                                <Link
-                                  to="/AddNewTeam"
-                                  style={{
-                                    textDecoration: "none",
-                                    color: "white",
-                                  }}
-                                >
-                                  <button className="btn btn-warning rounded">
-                                    Add new Teams
-                                  </button>
-                                </Link>
-                              </span>
-                            ) : (
-                              teamArray.map((team) => {
-                                return (
-                                  <>
-                                    <DisplayTeam
-                                      team={team}
-                                      key={team}
-                                      selectedTeam={selectedTeam}
-                                      points={points}
-                                      handleOptionChange={handleOptionChange}
-                                      increasePoints={increasePoints}
-                                    />
-                                  </>
-                                );
-                              })
-                            )}
+                          <div>
+                            <h1>{selectedTeam}</h1>
                           </div>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <div className="d-flex flex-column"></div>
+                        <div
+                          className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
+                          style={{ width: "25rem" }}
+                        >
+                          {teamArray.length === 0 ? (
+                            <span>
+                              <Link
+                                to="/AddNewTeam"
+                                style={{
+                                  textDecoration: "none",
+                                  color: "white",
+                                }}
+                              >
+                                <button className="btn btn-warning rounded">
+                                  Add new Teams
+                                </button>
+                              </Link>
+                            </span>
+                          ) : (
+                            teamArray.map((team) => {
+                              return (
+                                <>
+                                  <DisplayTeam
+                                    team={team}
+                                    key={team}
+                                    selectedTeam={selectedTeam}
+                                    points={points}
+                                    handleOptionChange={handleOptionChange}
+                                    increasePoints={increasePoints}
+                                  />
+                                </>
+                              );
+                            })
+                          )}
                         </div>
                         <div
                           className="d-flex flex-column "
@@ -396,23 +401,23 @@ function App() {
                           ) : (
                             <>
                               <button
-                                className="btn btn-success rounded w-75 my-3 "
+                                className="btn btn-success rounded  w-50 my-3"
                                 // style={{ marginBottom: "3rem" }}
                                 onClick={solded}
                               >
                                 Sold
                               </button>
                               <button
-                                className="btn btn-danger w-25 mx-2 rounded"
+                                className="btn btn-danger  rounded"
                                 onClick={unSold}
                               >
                                 Unsold
                               </button>
-                              {selectedTeam}
                             </>
                           )}
                         </div>
                       </div>
+
                       {/* // end of right part // // */}
                     </div>
                   </>
