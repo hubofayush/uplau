@@ -27,3 +27,13 @@ background-size: cover;
 .player_info {
   font-size: small;
 }
+
+/* main page backgroud image */
+.main_page {
+  background-image: url("src/assets/HTML Background Color — HTML Color Codes.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}
+/* end of main page backgroud image */

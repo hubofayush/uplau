@@ -282,17 +282,14 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <div
-                      className="main_page  d-flex flex-row "
-                      style={{ width: "fit-content" }}
-                    >
+                    <div className="main_page  d-flex flex-row ">
                       {/* // // left part // // */}
                       <div className="left-part">
                         <img
-                          className="mx-4 mt-4 rounded-1"
+                          className="mx-4 mt-4 rounded-3  "
                           src={linkHead}
-                          width="500"
-                          height="350"
+                          width="200"
+                          height="150"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           style={{
