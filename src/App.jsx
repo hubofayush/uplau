@@ -118,6 +118,18 @@ function App() {
       setPoints(10000);
     }
   };
+
+  const decreasePoints = () => {
+    if (points <= 3000 && points > 1000) {
+      setPoints(points - 200);
+    } else if (points <= 10000 && points > 3000) {
+      setPoints(points - 500);
+    } else if (points <= 1000 && points > 100) {
+      setPoints(points - 100);
+    } else if (points === 100) {
+      setPoints(100);
+    }
+  };
   //* end of point function
 
   //* lcoalstoraage
@@ -336,7 +348,10 @@ function App() {
                             >
                               Increase
                             </button>
-                            <button className="btn btn-dark mx-2 w-50 my-1 rounded-pill  ">
+                            <button
+                              className="btn btn-dark mx-2 w-50 my-1 rounded-pill  "
+                              onClick={decreasePoints}
+                            >
                               Decrease
                             </button>
                           </div>
@@ -353,7 +368,7 @@ function App() {
                       {/* // end of right part // // */}
                       <div className="right-main ">
                         <div
-                          className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
+                          className=" teams d-flex  flex-column justify-content-center align-items-start flex-wrap m-4 mx-5 px-5"
                           style={{ width: "25rem" }}
                         >
                           {teamArray.length === 0 ? (
