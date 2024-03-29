@@ -37,3 +37,24 @@ background-size: cover;
   width: 100%;
 }
 /* end of main page backgroud image */
+
+.left-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right-main {
+  display: flex;
+  flex-direction: column;
+}
+.selected_team {
+  /* transform: translateX(1rem); */
+  transform: translateY(-1.5rem);
+  font-size: 4rem;
+}
+.currentBid {
+  transform: translateY(0.5rem);
+}
+.right_side {
+  margin-right: -5rem;
+}

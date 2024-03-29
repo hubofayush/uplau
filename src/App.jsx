@@ -288,8 +288,8 @@ function App() {
                         <img
                           className="mx-4 mt-4 rounded-3  "
                           src={linkHead}
-                          width="200"
-                          height="150"
+                          width="400"
+                          height="350"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
                           style={{
@@ -298,7 +298,7 @@ function App() {
                           }}
                         />
 
-                        <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  tw-bold text-center">
+                        <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  text-white tw-bold text-center">
                           <h3 style={{ width: "auto" }}>
                             {JSON_data[item].Name}
                           </h3>
@@ -309,21 +309,23 @@ function App() {
                       {/* end of left part  */}
                       {/* right part  */}
                       <div
-                        className="right-side d-flex flex-column justify-content-start"
-                        style={{ width: "50rem" }}
+                        className="right-side d-flex flex-column justify-content-start "
+                        style={{ width: "45rem" }}
                       >
-                        <div className="d-flex flex-row justify-content-start mt-5">
+                        <div className="d-flex flex-row justify-content-around mt-5">
                           <div
                             className="d-flex justify-content-center my-2"
                             style={{
                               flexDirection: "column",
                               alignItems: "center",
-                              width: "25rem",
+                              width: "20rem",
                             }}
                           >
+                            {" "}
+                            <h2 className="text-center">Currents Points</h2>
                             <h1
                               className="points_h1 text-center "
-                              style={{ fontSize: "8rem" }}
+                              style={{ fontSize: "7rem" }}
                               key={points}
                             >
                               {points}
@@ -334,43 +336,56 @@ function App() {
                             >
                               Increase
                             </button>
+                            <button className="btn btn-dark mx-2 w-50 my-1 rounded-pill  ">
+                              Decrease
+                            </button>
                           </div>
-
-                          <div
-                            className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
-                            style={{ width: "25rem" }}
-                          >
-                            {teamArray.length === 0 ? (
-                              <span>
-                                <Link
-                                  to="/AddNewTeam"
-                                  style={{
-                                    textDecoration: "none",
-                                    color: "white",
-                                  }}
-                                >
-                                  <button className="btn btn-warning rounded">
-                                    Add new Teams
-                                  </button>
-                                </Link>
-                              </span>
-                            ) : (
-                              teamArray.map((team) => {
-                                return (
-                                  <>
-                                    <DisplayTeam
-                                      team={team}
-                                      key={team}
-                                      selectedTeam={selectedTeam}
-                                      points={points}
-                                      handleOptionChange={handleOptionChange}
-                                      increasePoints={increasePoints}
-                                    />
-                                  </>
-                                );
-                              })
-                            )}
+                          <div className="d-flex flex-column justify-content-center mx-5">
+                            <h2 className="currentBid text-center">
+                              Curretnt Bid
+                            </h2>
+                            <h1 className="m-auto selected_team">
+                              {selectedTeam}
+                            </h1>
                           </div>
+                        </div>
+                      </div>
+                      {/* // end of right part // // */}
+                      <div className="right-main ">
+                        <div
+                          className=" teams d-flex  flex-row justify-content-inline flex-wrap m-4 "
+                          style={{ width: "25rem" }}
+                        >
+                          {teamArray.length === 0 ? (
+                            <span>
+                              <Link
+                                to="/AddNewTeam"
+                                style={{
+                                  textDecoration: "none",
+                                  color: "white",
+                                }}
+                              >
+                                <button className="btn btn-warning rounded">
+                                  Add new Teams
+                                </button>
+                              </Link>
+                            </span>
+                          ) : (
+                            teamArray.map((team) => {
+                              return (
+                                <>
+                                  <DisplayTeam
+                                    team={team}
+                                    key={team}
+                                    selectedTeam={selectedTeam}
+                                    points={points}
+                                    handleOptionChange={handleOptionChange}
+                                    increasePoints={increasePoints}
+                                  />
+                                </>
+                              );
+                            })
+                          )}
                         </div>
                         <div
                           className="d-flex flex-column "
@@ -406,12 +421,10 @@ function App() {
                               >
                                 Unsold
                               </button>
-                              {selectedTeam}
                             </>
                           )}
                         </div>
                       </div>
-                      {/* // end of right part // // */}
                     </div>
                   </>
                 )}
