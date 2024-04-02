@@ -81,7 +81,7 @@ function App() {
     // console.log("addNewTeam", team)
     let newTeam1 = {
       name: team.name,
-      playersBought: [],
+      playersBought: team.playersBought,
     };
 
     setsoldPlayers([...soldPlayers, newTeam1]);
