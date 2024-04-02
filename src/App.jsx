@@ -310,7 +310,7 @@ function App() {
                           }}
                         />
 
-                        <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  text-white tw-bold text-center">
+                        <div className="player_info d-flex flex-column mx-4 p-3  justify-content-center  text-blcak tw-bold text-center">
                           <h3 style={{ width: "auto" }}>
                             {JSON_data[item].Name}
                           </h3>
@@ -322,7 +322,7 @@ function App() {
                       {/* right part  */}
                       <div
                         className="right-side d-flex flex-column justify-content-start "
-                        style={{ width: "45rem" }}
+                        style={{ width: "45rem" ,transform:'translateY(-4rem)'}}
                       >
                         <div className="d-flex flex-row justify-content-around mt-5">
                           <div
@@ -355,13 +355,13 @@ function App() {
                               Decrease
                             </button>
                           </div>
-                          <div className="d-flex flex-column justify-content-center mx-5">
+                          <div className="d-flex flex-column justify-content-center mx-5" style={{width:'12rem'}}>
                             <h2 className="currentBid text-center">
                               Curretnt Bid
                             </h2>
-                            <h1 className="m-auto selected_team">
+                            <span className="m-auto selected_team text-center fw-bold fs-1">
                               {selectedTeam}
-                            </h1>
+                            </span>
                           </div>
                         </div>
                       </div>

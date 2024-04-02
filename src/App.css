@@ -29,14 +29,19 @@ background-size: cover;
 }
 
 /* main page backgroud image */
-.main_page {
-  background-image: url("src/assets/HTML Background Color — HTML Color Codes.jpeg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100%;
-}
+/* .main_page { */
+  /* background-image: url("src/assets/HTML Background Color — HTML Color Codes.jpeg"); */
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+  /* height: 100vh; */
+  /* width: 100%; */
+/* } */
 /* end of main page backgroud image */
+
+.main_page{
+  align-items: center;
+    height: 80vh;
+}
 
 .left-part {
   display: flex;
@@ -56,5 +61,5 @@ background-size: cover;
   transform: translateY(0.5rem);
 }
 .right_side {
-  margin-right: -5rem;
+  margin-right: -5rem
 }
