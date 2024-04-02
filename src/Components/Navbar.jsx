@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, useNavigate } from "react-router-dom";
+import TaeamView from "./TaeamView";
 
 function Navbar(props) {
+  let navigate = useNavigate();
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black">
@@ -82,6 +85,38 @@ function Navbar(props) {
                                 team.playersBought,
                                 `${team.name}`
                               );
+                            }}
+                          >
+                            {team.name}
+                          </button>
+                        </li>
+                      </>
+                    );
+                  })}
+                </ul>
+              </li>
+              <li className="nav-item dropdown ">
+                <Link
+                  className="nav-link dropdown-toggle fw-bold"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{ color: "orange" }}
+                >
+                  Teams
+                </Link>
+                <ul className="dropdown-menu">
+                  {/* <li className="dropdown-item"></li> */}
+                  {props.soldPlayers?.map((team) => {
+                    return (
+                      <>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            onClick={() => {
+                              props.setshowteamPlayers(team);
+                              navigate("/TeamView");
                             }}
                           >
                             {team.name}

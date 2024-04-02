@@ -8,8 +8,14 @@ import DisplayTeam from "./Components/DisplayTeam";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
 import FetchCSVData from "./Components/TeakeFIle";
+import TaeamView from "./Components/TaeamView";
 
 function App() {
+  // section to display team players
+  const [showteamPlayers, setshowteamPlayers] = useState([]);
+
+  // end of section to display team players
+
   // section for insert the link of google sheets
   let data;
   if (localStorage.getItem("JSON_data") === null) {
@@ -172,6 +178,7 @@ function App() {
       let playerTeam = {
         name: JSON_data[item].Name,
         points: points,
+        skill: JSON_data[item].SKILLS,
         Points_Remain: 0,
       };
 
@@ -275,6 +282,7 @@ function App() {
           search={search}
           soldPlayers={soldPlayers}
           unSoldPlayers={unSoldPlayers}
+          setshowteamPlayers={setshowteamPlayers}
           key={search.Name}
         />
 
@@ -322,7 +330,10 @@ function App() {
                       {/* right part  */}
                       <div
                         className="right-side d-flex flex-column justify-content-start "
-                        style={{ width: "45rem" ,transform:'translateY(-4rem)'}}
+                        style={{
+                          width: "45rem",
+                          transform: "translateY(-4rem)",
+                        }}
                       >
                         <div className="d-flex flex-row justify-content-around mt-5">
                           <div
@@ -355,7 +366,10 @@ function App() {
                               Decrease
                             </button>
                           </div>
-                          <div className="d-flex flex-column justify-content-center mx-5" style={{width:'12rem'}}>
+                          <div
+                            className="d-flex flex-column justify-content-center mx-5"
+                            style={{ width: "12rem" }}
+                          >
                             <h2 className="currentBid text-center">
                               Curretnt Bid
                             </h2>
@@ -450,6 +464,11 @@ function App() {
             exact
             path="/addNewTeam"
             element={<AddNewTeam addNewTeam={addNewTeam} />}
+          ></Route>
+          <Route
+            exact
+            path="/TeamView"
+            element={<TaeamView team={showteamPlayers} />}
           ></Route>
         </Routes>
       </Router>
