@@ -1,6 +1,9 @@
 import React from "react";
 import { Link, Route, useNavigate } from "react-router-dom";
 import TaeamView from "./TaeamView";
+import { BsTable } from "react-icons/bs";
+import { FaDownload } from "react-icons/fa";
+import { MdFolderDelete } from "react-icons/md";
 
 function Navbar(props) {
   let navigate = useNavigate();
@@ -47,7 +50,7 @@ function Navbar(props) {
                   aria-expanded="false"
                   style={{ color: "orange" }}
                 >
-                  download
+                  <FaDownload />
                 </Link>
                 <ul className="dropdown-menu" key={props.soldPlayers}>
                   <li>
@@ -104,7 +107,7 @@ function Navbar(props) {
                   aria-expanded="false"
                   style={{ color: "orange" }}
                 >
-                  Teams
+                  <BsTable />
                 </Link>
                 <ul className="dropdown-menu">
                   {/* <li className="dropdown-item"></li> */}
@@ -128,6 +131,18 @@ function Navbar(props) {
                 </ul>
               </li>
             </ul>
+            <li className="nav-item dropdown ">
+                <Link
+                  className="nav-link"
+                  href="#"
+                  role="button"
+                  data-bs-toggle=""
+                  aria-expanded="false"
+                  style={{ color: "orange" }}
+                >
+                  <MdFolderDelete/>
+                  </Link>
+            </li>
           </div>
         </div>
       </nav>
