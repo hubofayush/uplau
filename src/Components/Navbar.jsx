@@ -11,7 +11,7 @@ function Navbar(props) {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-black">
-        <div className="container-fluid">
+        <div className="container-fluid ">
           <Link
             className="navbar-brand fw-bold"
             to="/"
@@ -32,7 +32,7 @@ function Navbar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav ">
+            <ul className="navbar-nav d-flex flex-row align-items-center">
               <Link
                 className="nav-link fw-bold mr-5"
                 to="/AddNewTeam"
@@ -50,7 +50,7 @@ function Navbar(props) {
                   aria-expanded="false"
                   style={{ color: "orange" }}
                 >
-                  <FaDownload />
+                  <FaDownload size={20} />
                 </Link>
                 <ul className="dropdown-menu" key={props.soldPlayers}>
                   <li>
@@ -98,7 +98,7 @@ function Navbar(props) {
                   })}
                 </ul>
               </li>
-              <li className="nav-item dropdown ">
+              <li className="nav-item dropdown mx-2">
                 <Link
                   className="nav-link dropdown-toggle fw-bold"
                   href="#"
@@ -107,7 +107,7 @@ function Navbar(props) {
                   aria-expanded="false"
                   style={{ color: "orange" }}
                 >
-                  <BsTable />
+                  <BsTable size={20} />
                 </Link>
                 <ul className="dropdown-menu">
                   {/* <li className="dropdown-item"></li> */}
@@ -130,19 +130,19 @@ function Navbar(props) {
                   })}
                 </ul>
               </li>
-            </ul>
-            <li className="nav-item dropdown ">
-                <Link
-                  className="nav-link"
-                  href="#"
-                  role="button"
-                  data-bs-toggle=""
+              <li className="nav-item ">
+                <button
+                  className="nav-link fw-bold "
                   aria-expanded="false"
                   style={{ color: "orange" }}
+                  onClick={() => {
+                    navigate("/DeleteDataset");
+                  }}
                 >
-                  <MdFolderDelete/>
-                  </Link>
-            </li>
+                  <MdFolderDelete size={30} />
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

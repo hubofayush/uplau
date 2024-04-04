@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddNewTeam from "./Components/AddNewTeam";
 import FetchCSVData from "./Components/TeakeFIle";
 import TaeamView from "./Components/TaeamView";
+import DeleteDataset from "./Components/DeleteDataset";
 
 function App() {
   // section to display team players
@@ -469,6 +470,11 @@ function App() {
             exact
             path="/TeamView"
             element={<TaeamView team={showteamPlayers} />}
+          ></Route>
+          <Route
+            exact
+            path="/DeleteDataset"
+            element={<DeleteDataset data={JSON_data} setdata={setJSON_data} />}
           ></Route>
         </Routes>
       </Router>
