@@ -4,7 +4,7 @@ background-repeat: no-repeat;
 background-size: cover;
 } */
 
-@keyframes animate-towards-top {
+/* @keyframes animate-towards-top {
   0% {
     transform: translateY(28px);
     opacity: 0;
@@ -13,7 +13,7 @@ background-size: cover;
     transform: translateY(0px);
     opacity: 1;
   }
-}
+} */
 
 .points_h1 {
   animation: animate-towards-top 1s;

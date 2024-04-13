@@ -105,37 +105,51 @@ function App() {
   //*  Function to handle changes in the selected option
   const handleOptionChange = (event) => {
     setSelectedTeam(event.target.value);
-    if (points > 100) {
-      increasePoints();
-    } else {
-    }
+    // if (points > 100) {
+    //   // increasePoints();
+    // } else {
+    // }
   };
 
   //* points function //
-  const [points, setPoints] = useState(100);
+  const [points, setPoints] = useState(50);
 
   const increasePoints = () => {
-    if (points < 1000) {
-      setPoints(points + 100);
-    } else if (points < 3000) {
-      setPoints(points + 200);
-    } else if (points < 10000) {
-      setPoints(points + 500);
-    } else if (points === 10000) {
-      setPoints(10000);
+    // if (points < 500) {
+      
+    //   setPoints(points + 100);
+    // } else if (points < 3000) {
+    //   setPoints(points + 200);
+    // } else if (points < 10000) {
+    //   setPoints(points + 500);
+    // } else if (points === 10000) {
+    //   setPoints(10000);
+    // }
+
+    if(points <= 500) {
+      setPoints(points + 20)
+    }
+    else if(points === 500 ){
+      setPoints(500)
     }
   };
 
   const decreasePoints = () => {
-    if (points <= 3000 && points > 1000) {
-      setPoints(points - 200);
-    } else if (points <= 10000 && points > 3000) {
-      setPoints(points - 500);
-    } else if (points <= 1000 && points > 100) {
-      setPoints(points - 100);
-    } else if (points === 100) {
-      setPoints(100);
+    // if (points <= 3000 && points > 1000) {
+    //   setPoints(points - 200);
+    // } else if (points <= 10000 && points > 3000) {
+    //   setPoints(points - 500);
+    // } else if (points <= 1000 && points > 100) {
+    //   setPoints(points - 100);
+    // } else if (points === 100) {
+    //   setPoints(100);
+    // }
+
+    if(points > 50){
+      setPoints(points - 20)
     }
+
+
   };
   //* end of point function
 
@@ -167,7 +181,7 @@ function App() {
       setItem(0);
     }
 
-    setPoints(100);
+    setPoints(50);
   };
 
   //* sold function
@@ -211,7 +225,7 @@ function App() {
       };
 
       setSearch([...search, player]);
-      setPoints(100);
+      setPoints(50);
       setSelectedTeam(null);
       next();
     }
@@ -243,8 +257,20 @@ function App() {
   //* main array of player data
   const [search, setSearch] = useState(initsold);
 
+ 
+ 
+// privios player
+const backPlayer = ()=>{
+  setItem(item -1)
+}
+
+
   //* useeffect
   useEffect(() => {
+
+    
+  
+
     localStorage.setItem("sold", JSON.stringify(search));
     localStorage.setItem("item", JSON.stringify(item));
     localStorage.setItem("unSold_Players", JSON.stringify(unSoldPlayers));
@@ -303,7 +329,9 @@ function App() {
                   </>
                 ) : (
                   <>
+                  
                     <div className="main_page  d-flex flex-row ">
+                    
                       {/* // // left part // // */}
                       <div className="left-part">
                         <img
@@ -439,7 +467,7 @@ function App() {
                           ) : (
                             <>
                               <button
-                                className="btn btn-success rounded w-75 my-3 "
+                                className="btn btn-success rounded w-75 my-2 "
                                 // style={{ marginBottom: "3rem" }}
                                 onClick={solded}
                               >
@@ -450,6 +478,12 @@ function App() {
                                 onClick={unSold}
                               >
                                 Unsold
+                              </button>
+                              <button
+                                className="btn btn-danger w-25 mx-2 mt-1 rounded"
+                                onClick={backPlayer}
+                              >
+                                Previous
                               </button>
                             </>
                           )}

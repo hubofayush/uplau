@@ -13,6 +13,11 @@ function DeleteDataset(props) {
   const deletedata = () => {
     if (confirm("Delete Dataset")) {
       localStorage.removeItem("JSON_data");
+      localStorage.removeItem('teamsArray')
+      localStorage.removeItem('unSold_Players')
+      localStorage.removeItem('sold')
+      localStorage.removeItem('soldPlayers')
+      localStorage.removeItem('item')
       props.setdata([]);
       //   if (data.length === 0) {
       navigate("/");

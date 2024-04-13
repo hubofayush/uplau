@@ -4,7 +4,7 @@ function DisplayTeam(props) {
   return (
     <>
       {props.team.points >= props.points ? (
-        <label className=" m-2">
+        <label className=" m-2 fs-5">
           <input
             type="radio"
             value={props.team.value}
