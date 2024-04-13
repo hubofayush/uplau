@@ -126,7 +126,7 @@ function App() {
     //   setPoints(10000);
     // }
 
-    if(points <= 500) {
+    if(points < 500) {
       setPoints(points + 20)
     }
     else if(points === 500 ){
@@ -185,6 +185,7 @@ function App() {
   };
 
   //* sold function
+  const phone = "CONTACT NUMBER"
   const solded = () => {
     if (selectedTeam === null) {
       alert("please select team");
@@ -195,6 +196,7 @@ function App() {
         points: points,
         skill: JSON_data[item].SKILLS,
         Points_Remain: 0,
+        contact:JSON_data[item].Phone
       };
 
       // ! dynamic creactin teams array object
